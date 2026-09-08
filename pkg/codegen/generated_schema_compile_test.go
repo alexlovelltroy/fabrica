@@ -130,7 +130,7 @@ func TestGeneratedGoldenSchemasCompile(t *testing.T) {
 // "imported and not used" — the common case, and the one both tokensmith
 // resources hit.
 type noStorageSpec struct {
-	Name      string    `json:"name" validate:"required"`
+	Label     string    `json:"label" validate:"required"`
 	CreatedBy string    `json:"created_by"`
 	ExpiresAt time.Time `json:"expires_at"`
 }
@@ -145,9 +145,9 @@ func TestSchemaWithoutHashedFieldsCompiles(t *testing.T) {
 	annots.IsResource = true
 	annots.StorageMode = annotations.StorageModeDedicated
 
-	name := annotations.NewFieldAnnotations("Name")
-	name.Size = 253
-	annots.Fields["Name"] = name
+	label := annotations.NewFieldAnnotations("Label")
+	label.Size = 253
+	annots.Fields["Label"] = label
 
 	got := generateDedicatedSchema(t, &noStorageResource{}, "noStorageResource", annots)
 
